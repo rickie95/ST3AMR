@@ -1,0 +1,4 @@
+pytorch==2.0.0s
+torchvision
+torchaudio
+pytorch-cuda==11.7
