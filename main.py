@@ -7,7 +7,7 @@ import torch.optim as optim
 
 from PIL import Image
 
-from autoencoder import AutoEncoder
+from convolutional_autoencoder import ConvolutionalAutoEncoder
 
 
 def main():
@@ -17,7 +17,7 @@ def main():
 
     device = torch.device("cuda")
 
-    model = AutoEncoder(input_shape=784).to(device)
+    model = ConvolutionalAutoEncoder().to(device)
     optimizer = optim.Adam(model.parameters(), lr=1e-3)
     criterion = nn.MSELoss()
     epochs = 40 
@@ -89,7 +89,7 @@ def main():
     with torch.no_grad():
         for batch_features in test_loader:
             batch_features = batch_features[0]
-            test_examples = batch_features.view(-1, 784).to(device)
+            test_examples = batch_features.to(device)
             reconstruction = model(test_examples)
             break
 
